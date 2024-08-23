@@ -1,0 +1,214 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("psql") //DATABASE_URL
+}
+
+model Delivery {
+  id             Int      @id @default(autoincrement())
+  city           String
+  quarter        String
+  deliveryDate   String
+  deliveryHoures String
+  codePromo      String?
+  indiqueName    String
+  indiqueNumber  Int
+  longitude      String?
+  latitude       String?
+  userId         Int
+  isVisible      Boolean  @default(true)
+  isActived      Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  user           User     @relation(fields: [userId], references: [id])
+  order          Order[]
+}
+
+model Order {
+  id           Int            @id @default(autoincrement())
+  totalPrice   Int
+  status       OrderStatus
+  payement     PayStatus
+  deliveryId   Int
+  isVisible    Boolean        @default(true)
+  isActived    Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  delivery     Delivery       @relation(fields: [deliveryId], references: [id])
+  orderProduct OrderProduct[]
+}
+
+model OrderProduct {
+  id        Int      @id @default(autoincrement())
+  quantity  Int
+  price     Int
+  productId Int
+  orderId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  order     Order    @relation(fields: [orderId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  date      String
+  userId    Int?
+  isVisible Boolean  @default(true)
+  isActived Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User?    @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  firstName String
+  lastName  String
+  phone     Int
+  email     String
+  role      RoleType
+  password  String
+  isVisible Boolean    @default(true)
+  isActived Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  comment   Comment[]
+  delivery  Delivery[]
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  imageUrl    String
+  isVisible   Boolean   @default(true)
+  isActived   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Product     Product[]
+}
+
+model Characteristic {
+  id        Int                     @id @default(autoincrement())
+  name      String
+  value     String
+  isVisible Boolean                 @default(true)
+  isActived Boolean                 @default(true)
+  createdAt DateTime                @default(now())
+  updatedAt DateTime                @updatedAt
+  product   ProductCharacteristic[]
+}
+
+model Product {
+  id                Int                     @id @default(autoincrement())
+  name              String
+  description       String?
+  imageUrl          String[]
+  price             Float
+  tax               Float?
+  categoryId        Int
+  isVisible         Boolean                 @default(true)
+  isActived         Boolean                 @default(true)
+  createdAt         DateTime                @default(now())
+  updatedAt         DateTime                @updatedAt
+  orderProduct      OrderProduct[]
+  productCategories Category                @relation(fields: [categoryId], references: [id])
+  characteristic    ProductCharacteristic[]
+  promotionProduct  PromotionProduct[]
+  stockProduct      StockProduct[]
+}
+
+model ProductCharacteristic {
+  id               Int            @id @default(autoincrement())
+  productId        Int
+  characteristicId Int
+  characteristic   Characteristic @relation(fields: [characteristicId], references: [id])
+  product          Product        @relation(fields: [productId], references: [id])
+}
+
+model Promotion {
+  id               Int                @id @default(autoincrement())
+  beginDate        String
+  endDate          String
+  description      String?
+  isVisible        Boolean            @default(true)
+  isActived        Boolean            @default(true)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  promotionProduct PromotionProduct[]
+}
+
+model PromotionProduct {
+  id          Int       @id @default(autoincrement())
+  newPrice    Int
+  oldPrice    Int
+  promotionId Int
+  productId   Int
+  product     Product   @relation(fields: [productId], references: [id])
+  promotion   Promotion @relation(fields: [promotionId], references: [id])
+}
+
+model Provider {
+  id        Int          @id @default(autoincrement())
+  name      String
+  address   String
+  phone     Int
+  type      Providertype
+  isVisible Boolean      @default(true)
+  isActived Boolean      @default(true)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  stock     Stock[]
+}
+
+model Stock {
+  id           Int            @id @default(autoincrement())
+  providerId   Int
+  isVisible    Boolean        @default(true)
+  isActived    Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  provider     Provider       @relation(fields: [providerId], references: [id])
+  StockProduct StockProduct[]
+}
+
+model StockProduct {
+  id         Int     @id @default(autoincrement())
+  quantity   Int
+  productId  Int
+  stockId    Int
+  stockPrice Int
+  product    Product @relation(fields: [productId], references: [id])
+  stock      Stock   @relation(fields: [stockId], references: [id])
+}
+
+enum PayStatus {
+  PAY
+  NOTPAY
+}
+
+enum OrderStatus {
+  NEW
+  DELIVRED
+  INDELIVERED
+  GOING
+  CANCEL
+  INSTOCK
+  FAILD
+}
+
+enum Providertype {
+  PROVIDER
+  DELIVER
+}
+
+enum RoleType {
+  ADMIN
+  GERANT
+  CUSTOMER
+}
