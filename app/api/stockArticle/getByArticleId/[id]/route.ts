@@ -5,7 +5,7 @@ import {NextResponse} from "next/server";
 export async function GET(req: Request, { params  }: { params: {id: string}}) {
     try {
         const id = Number(params.id);
-        const stockArticle = await prismadb.stockProduct.findMany({
+        const stockArticle = await prismadb.stockProduct.findFirst({
             where: { productId: id },
             include: {
                 product: {

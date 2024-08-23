@@ -135,7 +135,7 @@ const CoverPageCategory = () => {
                                     data2.map((items, index) => {
                                         return (
                                             <div key={index}
-                                                 className={"shadow-xl bg-white p-3 md:max-w-[25em]  rounded-lg flex  justify-between content-between"}>
+                                                 className={"shadow-xl bg-white p-3 md:max-w-[23em] md:mr-[5rem]  rounded-lg flex  justify-between content-between"}>
                                                 <Image src={items.imageUrl[0]} alt={"image"} width={150}
                                                        height={150}
                                                        className={"object-cover bg-cover bg-center self-center"}/>

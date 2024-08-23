@@ -30,12 +30,21 @@ const Menu = () => {
                 setLoading1(false)
             });
 
-        Api.read(`/api/article/getArticleByCategory/1`).then((item) => {
+            if(catId=='' || catId == undefined) {
+                  Api.read(`/api/article/getArticleByCategory/1`).then((item) => {
             setArticles(item);
         }).finally(() => {
             setLoading2(false)
         });
-    }, [catId]);
+            } else {
+                Api.read(`/api/article/getArticleByCategory/${catId}`).then((item) => {
+                    setArticles(item);
+                }).finally(() => {
+                    setLoading2(false)
+                });
+            }
+      
+    }, []);
     return(
         <Popover>
             <PopoverTrigger>
@@ -93,7 +102,7 @@ const Menu = () => {
                                          onClick={() => {
                                              route.push(`/edit-product/${items.id}`)
                                          }}
-                                         className={"flex flex-col cursor-pointer gap-2 bg-slate-100 rounded-lg p-2 items-center"} >
+                                         className={"flex flex-col h-[8.5rem] cursor-pointer gap-2 bg-slate-100 rounded-lg p-2 items-center"} >
                                         <div className={""}>
                                             <Image src={items.imageUrl[0]} alt={""} width={"80"} height={80} className={"object-cover"}/>
                                         </div>
