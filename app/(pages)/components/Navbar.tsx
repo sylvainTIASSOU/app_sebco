@@ -88,7 +88,7 @@ const Navbar = () => {
      */
                         }
                         <Link href={"/about"} className={pathname == "/about" ? "text-blue-600 font-bold" : ""}>A propos</Link>
-                        <Link href={"/contact"} className={pathname == "/contact" ? "text-blue-600 font-bold hidden md:flex" : " hover:text-blue-600"}>Contact</Link>
+                        <Link href={"/contact"} className={pathname == "/contact" ? "text-blue-600 font-bold " : " hover:text-blue-600"}>Contact</Link>
                         <Link href={"/history"} className={pathname == "/history" ? "text-blue-600 font-bold hidden md:flex" : "hidden md:flex hover:text-blue-600"}>Historique</Link>
                     </div>
 
