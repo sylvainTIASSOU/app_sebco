@@ -22,7 +22,6 @@ const  PromotionComp = () => {
     useEffect(() => {
         Api.read('/api/promotionArticle').then((promo) => {
             setPromotion(promo);
-            console.log(promo)
         })
     }, []);
     // @ts-ignore

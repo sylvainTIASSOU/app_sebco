@@ -16,6 +16,22 @@ const nextConfig = {
                 hostname: 'utfs.io'
             }
         ],
+        domains: [
+            'www.ta-holding.com',
+            'elyzee-events.com',
+            'beninwebtv.com',
+            'www.africanlease.com',
+            'w7.pngwing.com',
+            'seeklogo.com',
+            'www.mapbusiness.ma',
+            'www.republicoftogo.com',
+            "res.cloudinary.com",
+            "encrypted-tbn0.gstatic.com",
+            "togocom.tg",
+            "pbs.twimg.com",
+            "banque.meilleurtaux.com",
+            "media.lesechos.com",]
+           
     },
 };
 

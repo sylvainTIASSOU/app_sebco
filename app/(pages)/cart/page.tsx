@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/button";
 import React, { ReactNode, useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import CartModel from "@/models/CartModel";
-import {removeProduct, updateProduct} from "@/redux/features/cart-slice";
+import { removeProduct, updateProduct } from "@/redux/features/cart-slice";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import {Trash} from "lucide-react";
+import { Trash } from "lucide-react";
 
 
 interface DataType {
@@ -24,10 +24,10 @@ interface DataType {
     url?: string;
 }
 
-function  removeInArray(array: any[], element: any) {
+function removeInArray(array: any[], element: any) {
     const newArray = array.filter(item => item !== element);
 
-    if(array.length != newArray.length) {
+    if (array.length != newArray.length) {
         return true;
     }
     else
@@ -47,8 +47,8 @@ const Cart = () => {
 
     useEffect(() => {
         // setItems(itemCart)
-        setTotal(items.reduce((totals, cartModel ) => totals + cartModel.priceTotal, 0));
-        const datas : DataType[] = [];
+        setTotal(items.reduce((totals, cartModel) => totals + cartModel.priceTotal, 0));
+        const datas: DataType[] = [];
         itemCart.forEach((element) => {
 
             datas.push({
@@ -129,23 +129,23 @@ const Cart = () => {
                 <Space size="middle">
 
                     <Button size={'icon'}
-                            variant={"destructive"}
-                            onClick={() => {
+                        variant={"destructive"}
+                        onClick={() => {
 
-                                // @ts-ignore
-                                dispatch(removeProduct(record.key))
+                            // @ts-ignore
+                            dispatch(removeProduct(record.key))
 
-                                router.refresh()
-                                toast({
-                                    title: "Article suprimer",
-                                    variant: "destructive"
-                                })
+                            router.refresh()
+                            toast({
+                                title: "Article suprimer",
+                                variant: "destructive"
+                            })
 
 
-                            }}
+                        }}
 
                     >
-                        <Trash className={''}/>
+                        <Trash className={''} />
                     </Button>
                 </Space>
             ),
@@ -185,23 +185,23 @@ const Cart = () => {
                 <Space size="middle">
 
                     <Button size={'icon'}
-                            variant={"destructive"}
-                            onClick={() => {
+                        variant={"destructive"}
+                        onClick={() => {
 
-                                // @ts-ignore
-                                dispatch(removeProduct(record.key))
+                            // @ts-ignore
+                            dispatch(removeProduct(record.key))
 
-                                router.refresh()
-                                toast({
-                                    title: "Article suprimer",
-                                    variant: "destructive"
-                                })
+                            router.refresh()
+                            toast({
+                                title: "Article suprimer",
+                                variant: "destructive"
+                            })
 
 
-                            }}
+                        }}
 
                     >
-                        <Trash className={''}/>
+                        <Trash className={''} />
                     </Button>
                 </Space>
             ),
@@ -214,19 +214,19 @@ const Cart = () => {
             <div className=" mt-[35%] md:mt-[10%] p-3  flex flex-col items-center justify-center">
 
                 <Image src={"/images/sammy-grocery-cart-1.gif"}
-                       alt={"data empty"}
-                       priority
-                       width={500}
-                       height={500}
-                       className={"bg-center bg-cover"}
+                    alt={"data empty"}
+                    priority
+                    width={500}
+                    height={500}
+                    className={"bg-center bg-cover"}
                 />
 
                 <h1 className={"text-center font-regular text-blue-600 text-[25px]"}>
-                    C'est un peu vide par ici!!! <br/>
+                    C'est un peu vide par ici!!! <br />
                     <span className={"text-center text-[18px] text-black font-light"}>
-                            Commencez par ajouter quelques <br/>
-                         articles au panier.
-                        </span>
+                        Commencez par ajouter quelques <br />
+                        articles au panier.
+                    </span>
                 </h1>
 
             </div>
@@ -239,12 +239,12 @@ const Cart = () => {
             {/** cart product list of mobile */}
 
             <section className="md:hidden flex mt-20 mx-4">
-                <Table columns={columnsMobile} dataSource={data}  />
+                <Table columns={columnsMobile} dataSource={data} />
             </section>
 
             {/** cart product list of web */}
             <section className="hidden  md:flex mt-20 mx-2">
-                <Table columns={columns} dataSource={data}  />
+                <Table columns={columns} dataSource={data} />
             </section>
 
             <div
@@ -280,6 +280,18 @@ const Cart = () => {
                 <div className={" text-[18px] md:text-[20px]"}>
                     TOTAL: <span className={"text-blue-600"}> {total} TTC</span>
                 </div>
+            </div>
+
+            <div className="mt-5 flex flex-col gap-4">
+                <h1 className="text-center">
+                    Payez par chèque/ virement bancaire / Mobile money ou en espèces en boutique.
+                </h1>
+                <h1 className="text-center">
+                    Livraison gratuite à Lomé pour tous les articles de la catégorie. <br />
+                    Livraison a petit prix partout au TOGO
+                </h1>
+
+                <h1 className="text-center">Satisfais ou 100%% remboursé</h1>
             </div>
         </div>
     );

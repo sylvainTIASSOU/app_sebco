@@ -36,7 +36,7 @@ const CoverPageArticle = () => {
                 matériaux de construction.
             </h1>
 
-            <div className={"grid grid-cols-1 md:grid-cols-4 gap-4"}>
+            <div className={"grid grid-cols-1 md:grid-cols-6 gap-4"}>
                 {
                     loading ?
                         [1, 2, 3, 4, 5, 6].map((items) => {
@@ -53,7 +53,7 @@ const CoverPageArticle = () => {
 
                             :
                             articlesData.map((items, index) => {
-                                if (index < 4) {
+                                if (index < 6) {
                                     return (
                                         <div key={index}
                                              className={"shadow-xl bg-white space-y-5 p-3 md:w-[15em] mx-[3rem] md:mx-0 rounded-lg flex flex-col justify-between content-between"}>
@@ -87,6 +87,8 @@ const CoverPageArticle = () => {
                 }
 
             </div>
+
+
             <div className={" w-full md:px-0"}>
                 {/*swipper*/}
                 <section className={"flex items-center content-center justify-center"}>
@@ -103,6 +105,7 @@ const CoverPageArticle = () => {
                         <CarouselContent className={" w-full"}>
                             {
                                 articlesData.map((items, index) => {
+                                   if(index> 3 && index < 10) {
                                     return (
                                         <CarouselItem key={index} className={"md:basis-1/2 lg:basis-1/3"}>
                                             <div className="p-1">
@@ -142,6 +145,7 @@ const CoverPageArticle = () => {
                                             </div>
                                         </CarouselItem>
                                     )
+                                   }
                                 })
                             }
                         </CarouselContent>
@@ -154,7 +158,7 @@ const CoverPageArticle = () => {
 
             <Button
                 onClick={() => {
-                    route.push("/articles/1");
+                    route.push("/categories");
                 }}
                 className={"flex space-x-3 bg-transparent border-none w-[150px]  shadow-none text-blue-600  "}>
                 <h1 className={"text-sm"}>
