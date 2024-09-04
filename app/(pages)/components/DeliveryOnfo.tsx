@@ -46,7 +46,7 @@ const DeliveryOnfo = ({ open , setOpen }: BannerProps) => {
 
 
                     <div className="w-full bg-textColor">
-                        <Image src={"/images/sammy-man-and-dog-delivering-packages-on-a-moped.gif"} alt="logo" width={430} height={430} className="text-buttonColor1 object-cover" />
+                        <Image src={"/images/sammy-man-and-dog-delivering-packages-on-a-moped.gif"} alt="logo" width={430} height={430} priority className="text-buttonColor1 object-cover" />
                     </div>
 
                 </div>
