@@ -45,8 +45,12 @@ const DeliveryOnfo = ({ open , setOpen }: BannerProps) => {
                     </div>
 
 
-                    <div className="w-full bg-textColor">
+                    <div className="hidden md:flex w-full bg-textColor">
                         <Image src={"/images/sammy-man-and-dog-delivering-packages-on-a-moped.gif"} alt="logo" width={430} height={430} priority className="text-buttonColor1 object-cover" />
+                    </div>
+
+                    <div className="w-full flex md:hidden bg-textColor">
+                        <Image src={"/images/sammy-man-and-dog-delivering-packages-on-a-moped.gif"} alt="logo" width={250} height={250} priority className="text-buttonColor1 object-cover" />
                     </div>
 
                 </div>
